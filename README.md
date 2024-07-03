@@ -1,0 +1,3 @@
+## PrimeFactor
+
+BASEBALL KATA
