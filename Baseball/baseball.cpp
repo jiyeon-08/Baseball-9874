@@ -13,9 +13,22 @@ public:
 	}
 	GuessResult guess(const string& guessNumber) {
 		asserIllegalArgument(guessNumber);
+		result = { false, 0, 0 };
+		for (int i = 0; i < 3; i++) {
+			if (guessNumber[i] == question[i]) {
+				result.strikes++;
+			}
+			else if (question.find(guessNumber[i]) != string::npos) {
+				result.balls++;
+			}
+		}
+		if (result.strikes == 3) {
+			result.solved = true;
+		}
+		return result;
 		return { true, 3, 0 };
 	}
-
+private:
 	void asserIllegalArgument(const std::string& guessNumber)
 	{
 		if (guessNumber.length() != 3) {
@@ -39,6 +52,7 @@ public:
 		}
 		return false;
 	}
-private: 
+
+	GuessResult result;
 	string question;
 };
